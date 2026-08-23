@@ -5,7 +5,7 @@
 This lab documents cybersecurity architecture as deliberate practice:
 security programs, controls, trade-offs, and the reasoning behind security
 decisions — the same engineering discipline applied to
-[Architecture Lab](https://chanduazad001.github.io/architecture-lab/),
+[Solution Architecture Lab](https://chanduazad001.github.io/solution-architecture-lab/),
 scoped to security.
 
 The goal is the same: **not just to list controls, but to understand why a
@@ -52,7 +52,7 @@ flowchart LR
 
 ## Related
 
-* [Architecture Lab](https://chanduazad001.github.io/architecture-lab/) — cloud architecture, platform engineering, and system design
+* [Solution Architecture Lab](https://chanduazad001.github.io/solution-architecture-lab/) — cloud architecture, platform engineering, and system design
 * [chanduazad001.github.io](https://chanduazad001.github.io/) — all labs
 
 ---

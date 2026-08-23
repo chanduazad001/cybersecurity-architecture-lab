@@ -8,7 +8,7 @@ reasoning behind security decisions.
 
 Part of a wider set of labs linked from
 [chanduazad001.github.io](https://chanduazad001.github.io/), including
-[Architecture Lab](https://chanduazad001.github.io/architecture-lab/)
+[Solution Architecture Lab](https://chanduazad001.github.io/solution-architecture-lab/)
 (cloud architecture, platform engineering, and system design).
 
 ## Structure
