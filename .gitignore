@@ -1,0 +1,19 @@
+# Python virtual environment
+.venv/
+
+# MkDocs generated site
+site/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Working notes / drafts not ready for the public site
+docs/ideas/
+
+# IDE
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
