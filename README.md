@@ -9,15 +9,23 @@ reasoning behind security decisions.
 Part of a wider set of labs linked from
 [chanduazad001.github.io](https://chanduazad001.github.io/), including
 [Solution Architecture Lab](https://chanduazad001.github.io/solution-architecture-lab/)
-(cloud architecture, platform engineering, and system design).
+(cloud architecture, platform engineering, and system design) and
+[AI Platform Architecture Lab](https://chanduazad001.github.io/ai-platform-architecture-lab/)
+(AI platform architecture and AI system design).
 
 ## Structure
 
-Each security domain lives under `docs/<domain>/` as its own top-level nav
-section, sibling to the others (e.g. Vulnerability Management, and future
-domains such as Application Security, Cloud Security, IAM, and Threat
-Modeling). Within a domain, pages follow a consistent set appropriate to
-that domain — typically an Overview, the program/process detail, and a
+- **Cybersecurity Architecture** — security programs and controls,
+  currently the vulnerability management program (discovery, risk
+  prioritization, remediation SLAs, metrics, and ADRs), with future
+  domains such as Application Security, Cloud Security, IAM, and Threat
+  Modeling.
+- **Security System Design** — the reusable system-design theory behind
+  security architecture decisions: threat modeling, zero trust, and
+  identity and access design.
+
+Within a domain, pages follow a consistent set appropriate to that
+domain — typically an Overview, the program/process detail, and a
 Decisions page recording ADRs.
 
 Diagrams are written as [Mermaid](https://mermaid.js.org/) inline in the

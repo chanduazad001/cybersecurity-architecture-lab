@@ -14,15 +14,21 @@ is operated.**
 
 ---
 
-## Domains
+## Focus Areas
 
-Each domain lives under its own top-level section, documented with a
-consistent set of pages appropriate to that domain — typically an
-Overview, the program/process detail, and a Decisions page recording ADRs.
+### Cybersecurity Architecture
 
-| Domain | Description | Status |
-| --------------- | -------------- | -------- |
-| [Vulnerability Management](vulnerability-management/index.md) | Discovering, prioritizing, remediating, and reporting on vulnerabilities across the estate — the program lifecycle, SLAs, and the ADRs behind them. | Active |
+Security programs, controls, and Architecture Decision Records —
+currently the vulnerability management program: discovering,
+prioritizing, remediating, and reporting on vulnerabilities across the
+estate, its lifecycle, SLAs, and the ADRs behind them.
+
+### Security System Design
+
+The reusable system-design theory behind security architecture
+decisions: threat modeling, zero trust, identity and access design, and
+the other system-design concerns specific to building security into
+systems at scale.
 
 ---
 
@@ -52,8 +58,9 @@ flowchart LR
 
 ## Related
 
+* [chanduazad001.github.io](https://chanduazad001.github.io/) — all labs, and more about me
 * [Solution Architecture Lab](https://chanduazad001.github.io/solution-architecture-lab/) — cloud architecture, platform engineering, and system design
-* [chanduazad001.github.io](https://chanduazad001.github.io/) — all labs
+* [AI Platform Architecture Lab](https://chanduazad001.github.io/ai-platform-architecture-lab/) — AI platform architecture and AI system design
 
 ---
 
