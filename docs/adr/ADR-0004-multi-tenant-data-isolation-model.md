@@ -6,9 +6,9 @@ Accepted
 
 ## Context
 
-The internal VM program's CMDB and Composite Scoring Engine (ADR-0001) were designed for a single-tenant estate — Sreelaxmi's own infrastructure. Extending VM-as-a-Service to external clients pursuing PCI DSS (see [Charter §2.1](../00-charter-and-business-case.md#21-new-business-driver-pci-dss-as-a-service-added-2026-08-23)) means these same components must now hold and process data belonging to multiple distinct client CDEs — some of whom may be competitors of each other within BFSI/retail.
+The internal VM program's CMDB and Composite Scoring Engine (ADR-0001) were designed for a single-tenant estate — Meridian's own infrastructure. Extending VM-as-a-Service to external clients pursuing PCI DSS (see [Charter §2.1](../00-charter-and-business-case.md#21-new-business-driver-pci-dss-as-a-service-added-2026-08-23)) means these same components must now hold and process data belonging to multiple distinct client CDEs — some of whom may be competitors of each other within BFSI/retail.
 
-PCI DSS treats any cross-client visibility into another client's CDE inventory, findings, or scan results as itself a reportable data exposure. This is not an ordinary application multi-tenancy problem — it is a compliance-boundary problem, and a QSA auditing one client's PCI evidence may ask Sreelaxmi to demonstrate the isolation model directly.
+PCI DSS treats any cross-client visibility into another client's CDE inventory, findings, or scan results as itself a reportable data exposure. This is not an ordinary application multi-tenancy problem — it is a compliance-boundary problem, and a QSA auditing one client's PCI evidence may ask Meridian to demonstrate the isolation model directly.
 
 ## Business Attributes
 
@@ -22,7 +22,7 @@ PCI DSS treats any cross-client visibility into another client's CDE inventory, 
 
 ## Decision Drivers
 
-- **Audit-defensibility** — Sreelaxmi must be able to show a QSA, on demand, exactly how Client A's data is prevented from being visible to Client B; a strong architectural boundary is easier to defend than a policy-only one
+- **Audit-defensibility** — Meridian must be able to show a QSA, on demand, exactly how Client A's data is prevented from being visible to Client B; a strong architectural boundary is easier to defend than a policy-only one
 - **Blast radius of a breach** — how much data is exposed, and to whom, if isolation fails
 - **Operational cost** — schema migrations, backups, and monitoring multiply with the number of isolated units
 - **Time-to-onboard a new client** — how much provisioning work is required per client
@@ -40,7 +40,7 @@ Each client gets a dedicated database (schema + data) within the CMDB and scorin
 
 A single shared database; every row carries a `client_id`, enforced via application-layer checks and database row-level security (RLS) policies.
 
-- **Pros:** lowest operational overhead — one schema to migrate, monitor, and back up; fastest to provision a new client (insert a tenant record, no infrastructure change); easiest path for Sreelaxmi's own cross-tenant aggregate reporting
+- **Pros:** lowest operational overhead — one schema to migrate, monitor, and back up; fastest to provision a new client (insert a tenant record, no infrastructure change); easiest path for Meridian's own cross-tenant aggregate reporting
 - **Cons:** isolation depends on every query correctly applying the tenant filter or RLS policy — a single missed filter (application bug or an ad hoc admin query) can leak cross-client data; the weakest audit story of the three, since isolation is logical/policy-enforced rather than structural; a bug or breach has full-database blast radius
 
 ### Option C — Fully Separate Deployed Instances per Client
@@ -54,7 +54,7 @@ Each client gets a dedicated, independently deployed instance of the CMDB and sc
 
 Adopt **Option A — separate database per client**, with shared application/compute infrastructure (scanning orchestration, scoring engine logic, reporting UI) but per-client database isolation.
 
-This is weighed primarily on the two decision drivers the business context makes non-negotiable: audit-defensibility and blast radius. Option B's cross-tenant leak risk is exactly the failure mode PCI DSS treats as a reportable incident in its own right — "a missing `WHERE client_id = ?`" is not a risk Sreelaxmi should accept when the affected data belongs to a client's cardholder data environment. Option C's isolation is stronger still, but its operational cost defeats the commercial premise of offering this as a shared service rather than bespoke per-client deployments; that cost is not justified by the incremental risk reduction over Option A, which already provides structural database-level isolation. Option A is the point on this curve where the audit story is simple and defensible without paying for N fully separate infrastructure stacks.
+This is weighed primarily on the two decision drivers the business context makes non-negotiable: audit-defensibility and blast radius. Option B's cross-tenant leak risk is exactly the failure mode PCI DSS treats as a reportable incident in its own right — "a missing `WHERE client_id = ?`" is not a risk Meridian should accept when the affected data belongs to a client's cardholder data environment. Option C's isolation is stronger still, but its operational cost defeats the commercial premise of offering this as a shared service rather than bespoke per-client deployments; that cost is not justified by the incremental risk reduction over Option A, which already provides structural database-level isolation. Option A is the point on this curve where the audit story is simple and defensible without paying for N fully separate infrastructure stacks.
 
 ## Consequences
 
@@ -68,11 +68,11 @@ This is weighed primarily on the two decision drivers the business context makes
 
 - Operational tooling (migrations, monitoring, backups, connection management) must be built to be tenant-aware and scale per-database, not per-row
 - New client onboarding requires a database provisioning step, not just a config/tenant-record insert — slower than Option B
-- Internal cross-client reporting (e.g., Sreelaxmi's own aggregate service-health metrics across all PCI clients) requires an explicit aggregation layer rather than a simple query, since data is not held in one shared table
+- Internal cross-client reporting (e.g., Meridian's own aggregate service-health metrics across all PCI clients) requires an explicit aggregation layer rather than a simple query, since data is not held in one shared table
 
 ## Follow-ups
 
 - Define the per-client database provisioning runbook as part of client onboarding, not a one-off manual step
 - Confirm the scoring engine and scanning orchestration layer can be parameterized per-tenant database connection without code duplication
-- Define the internal aggregate-reporting layer needed for Sreelaxmi's own cross-client service-health metrics without violating per-client isolation
+- Define the internal aggregate-reporting layer needed for Meridian's own cross-client service-health metrics without violating per-client isolation
 - Re-evaluate at scale: if client count grows large enough that per-database operational overhead becomes the bottleneck, revisit Option C-style isolation for specifically high-value/high-risk clients, or invest in database-per-client provisioning automation

@@ -1,6 +1,6 @@
 # Vulnerability Management Program — Architecture & Process
 
-**Organization:** Sreelaxmi Global Services
+**Organization:** Meridian Global Services
 **Layer mapping:** SABSA Logical (process/information flow) & Physical (mechanisms)
 
 ---
@@ -110,7 +110,7 @@ sequenceDiagram
 
 ---
 
-## 3. Physical Layer — Component Choices for Sreelaxmi
+## 3. Physical Layer — Component Choices for Meridian
 
 | Logical Component | Physical Implementation (proposed) |
 |---|---|
@@ -119,10 +119,10 @@ sequenceDiagram
 | Container Image Scanning | Trivy or Nessus's container plugin integrated into the AKS CI/CD pipeline |
 | EPSS Feed | FIRST.org EPSS API (free, public) |
 | Scoring Engine | Custom Python service (build, not buy — per [ADR-0001](adr/ADR-0001-composite-risk-prioritization-model.md) rationale), consuming scanner + EPSS + CMDB APIs |
-| Ticketing | Existing ITSM tool if Sreelaxmi has one; else lightweight Jira Service Management instance |
+| Ticketing | Existing ITSM tool if Meridian has one; else lightweight Jira Service Management instance |
 | Patch Automation | Ansible for Linux/servers, WSUS/SCCM (or Intune, if licensed) for Windows desktop fleet |
 | Dashboard/Reporting | Grafana or the ticketing tool's native reporting, feeding a monthly PDF pack for auditors |
-| ASV-Certified External Scanning *(new — PCI-DSS-as-a-Service)* | Partner ASV, orchestrated by Sreelaxmi's platform rather than operated in-house — see [ADR-0003](adr/ADR-0003-external-asv-scanning-approach.md) |
+| ASV-Certified External Scanning *(new — PCI-DSS-as-a-Service)* | Partner ASV, orchestrated by Meridian's platform rather than operated in-house — see [ADR-0003](adr/ADR-0003-external-asv-scanning-approach.md) |
 | Multi-Tenant CMDB / Scoring Engine Isolation *(new — PCI-DSS-as-a-Service)* | Separate database per client, shared application/compute layer — see [ADR-0004](adr/ADR-0004-multi-tenant-data-isolation-model.md) |
 
 ## 4. RACI
@@ -140,7 +140,7 @@ sequenceDiagram
 
 ### 4.1 PCI-DSS-as-a-Service Additions (Added 2026-08-23)
 
-New client-facing activities introduced by the PCI-DSS-as-a-Service pivot, with a new **PCI Program Lead** role covering QSA/client-facing reporting — added as a column rather than folded into the existing roles above, since the internal RACI's "Auditor reporting" row is scoped to Sreelaxmi's own SOC 2 / ISO 27001 auditors, not a client's QSA.
+New client-facing activities introduced by the PCI-DSS-as-a-Service pivot, with a new **PCI Program Lead** role covering QSA/client-facing reporting — added as a column rather than folded into the existing roles above, since the internal RACI's "Auditor reporting" row is scoped to Meridian's own SOC 2 / ISO 27001 auditors, not a client's QSA.
 
 | Activity | CISO | Security Architect | IT Infra | PCI Program Lead (Client-Facing) | Client QSA (external) |
 |---|---|---|---|---|---|
@@ -151,4 +151,4 @@ New client-facing activities introduced by the PCI-DSS-as-a-Service pivot, with 
 | Respond to QSA follow-up / evidence queries | I | C | I | A/R | C |
 | Approve client-facing risk exceptions (CDE-scoped) | A/R | C | I | C | I |
 
-*(A = Accountable, R = Responsible, C = Consulted, I = Informed. The Client QSA is external to Sreelaxmi and is never Accountable or Responsible for Sreelaxmi-side activities — included here to make explicit which activities require QSA touchpoints.)*
+*(A = Accountable, R = Responsible, C = Consulted, I = Informed. The Client QSA is external to Meridian and is never Accountable or Responsible for Meridian-side activities — included here to make explicit which activities require QSA touchpoints.)*

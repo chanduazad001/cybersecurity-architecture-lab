@@ -44,7 +44,7 @@ nav:
       - Remediation & SLAs: vulnerability-management/remediation-slas.md
       - Metrics & Reporting: vulnerability-management/metrics-reporting.md
       - Decisions: vulnerability-management/decisions.md
-      - VM Program Case Study (Sreelaxmi):
+      - VM Program Case Study (Meridian):
           - Charter & Business Case: 00-charter-and-business-case.md
           - Architecture & Process: 01-architecture-and-process.md
           - ADR-0001 Composite Risk Prioritization: adr/ADR-0001-composite-risk-prioritization-model.md
