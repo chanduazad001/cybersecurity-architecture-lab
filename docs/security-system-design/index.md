@@ -1,8 +1,15 @@
 # Security System Design
 
-This section is a placeholder for content on designing security into
-systems at scale — secure architecture patterns, threat modeling, zero
-trust, identity and access design, and the other system-design concerns
-specific to security architecture.
+This section covers designing security into systems at scale — starting
+from first principles (the CIA triad and related fundamentals) and
+building up to secure architecture patterns, threat modeling, zero trust,
+and identity and access design.
 
-Content for this section is coming soon.
+## Pages in This Domain
+
+| Page | Description |
+| --- | --- |
+| [Security Fundamentals](fundamentals.md) | The CIA triad, AAA, and the core design principles (least privilege, defense in depth, zero trust, ...) used throughout this lab |
+
+More content — secure architecture patterns, threat modeling, zero trust,
+and identity and access design — is coming soon.

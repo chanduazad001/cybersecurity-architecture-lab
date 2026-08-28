@@ -54,3 +54,4 @@ nav:
 
   - Security System Design:
       - Overview: security-system-design/index.md
+      - Security Fundamentals: security-system-design/fundamentals.md
